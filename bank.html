@@ -1,0 +1,70 @@
+<html lang="de">
+	<head>
+		<title>Mono Banking App - Management</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8"/>
+
+		<script src="https://kit.fontawesome.com/f8a5ebdbbb.js" crossorigin="anonymous"></script>
+		
+		<link rel="stylesheet" href="./assets/styles/main.css">
+		<link rel="stylesheet" href="./assets/styles/bank.css">
+
+		<link rel="apple-touch-icon" href="./assets/images/icon.jpg">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-title" content="Monopoly Bank">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+		<script src="./assets/scripts/jquery-3.6.0.min.js"></script>
+		<script src="./assets/scripts/main.js"></script>
+		<script src="./assets/scripts/bank/monopoly.bank.js"></script>
+		<script src="./assets/scripts/bank/socket.bank.js"></script>
+	</head>
+	<body>
+		<div class="notification-wrapper" id="notifications"></div>
+		<div class="login-wrapper">
+			<div class="icon">
+				<i class="fa-solid fa-dice"></i>
+			</div>
+			<h2>Monopoly Banking App</h2>
+			<input type="text" id="login-name" class="input-pay" placeholder="Spielername">
+			<div class="login-button" id="login-button">
+				<i class="fa-solid fa-angles-right"></i>
+			</div>
+		</div>
+		<div class="page-wrapper">
+			<div class="header">Monopoly Banking Dashboard</div>
+			<div class="banking-wrapper">
+				<div class="menu-wrapper">
+					<ul class="navbar">
+						<li data-page="transactions"><i class="fa-solid fa-list"></i></li>
+						<li data-page="transferMoney"><i class="fa-solid fa-hand-holding-dollar"></i></li>
+						<li data-page="settings"><i class="fa-solid fa-user-gear"></i></li>
+					</ul>
+				</div>
+				<div class="content-wrapper">
+					<div class="page" id="transactions">
+						<div class="transaction-list">
+
+						</div>
+					</div>
+					<div class="page" id="transferMoney">
+						<div class="transfer-wrapper">
+							<div>
+								<div class="headline">Presets</div>
+								<div class="presets"></div>
+							</div>
+							<div>
+								<div class="headline">Manuelle Überweisung</div>
+							</div>
+						</div>
+					</div>
+					<div class="page" id="settings">
+						Einstellungen
+					</div>
+				</div>
+				<div class="player-wrapper"></div>
+			</div>
+		</div>
+	</body>
+</html>

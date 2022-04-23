@@ -1,0 +1,95 @@
+<html lang="de">
+	<head>
+		<title>Mono Banking App</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8"/>
+
+		<script src="https://kit.fontawesome.com/f8a5ebdbbb.js" crossorigin="anonymous"></script>
+		
+		<link rel="stylesheet" href="./assets/styles/main.css">
+		<link rel="stylesheet" href="./assets/styles/client.css">
+
+		<link rel="apple-touch-icon" href="./assets/images/icon.jpg">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-title" content="Monopoly Client">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+		<script src="./assets/scripts/jquery-3.6.0.min.js"></script>
+		<script src="./assets/scripts/main.js"></script>
+		<script src="./assets/scripts/client/monopoly.client.js"></script>
+		<script src="./assets/scripts/client/socket.client.js"></script>
+	</head>
+	<body>
+		<div class="notification-wrapper" id="notifications"></div>
+		<div class="login-wrapper">
+			<div class="icon">
+				<i class="fa-solid fa-dice"></i>
+			</div>
+			<h2>Monopoly Banking App</h2>
+			<input type="text" id="login-name" class="input-pay" placeholder="Spielername">
+			<div class="login-button" id="login-button">
+				<i class="fa-solid fa-angles-right"></i>
+			</div>
+		</div>
+		<div class="page-wrapper">
+			<div class="header"></div>
+			<div class="balance-box noselect" id="balanceBox">
+				<div class="name" id="balance-box-name"><p>Hallo unknown!</p></div>
+				<h2 id="user-money" class="text-blur"></h2>
+				<div class="icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+			</div>
+			<div class="main-content">
+				<div class="sub-page" id="transactions" data-title="Transaktionen">
+					<div class="transaction-list">
+						
+					</div>
+				</div>
+				<div class="sub-page" id="payments" data-title="Geld überweisen">
+					<div class="player-list">
+						<div class="player" data-name="Nico">
+							<div class="icon">
+								NI
+							</div>
+							<p>Nico</p>
+						</div>
+						<div class="player" data-name="Lisa">
+							<div class="icon">
+								LI
+							</div>
+							<p>Lisa</p>
+						</div>
+						<div class="player" data-name="Luca">
+							<div class="icon">
+								LU
+							</div>
+							<p>Luca</p>
+						</div>
+						<div class="player" data-name="Kevin">
+							<div class="icon">
+								KE
+							</div>
+							<p>Kevin</p>
+						</div>
+					</div>
+					<input type="number" inputmode="decimal" id="payAmount" class="input-pay" placeholder="Betrag">
+					<div class="transaction pay-preview" id="pay-preview">
+						
+						<div class="content">
+							<p><b id="pay-preview-receiver"></b><br />Überweisung</p>
+							<p class="money money-negative" id="pay-preview-amount"></p>
+							<p class="time">Vorschau der Transaktion</p>
+						</div>
+						<div class="icon" id="pay-preview-submit">
+							<i class="fa-solid fa-paper-plane"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="navbar">
+				<li data-page="transactions"><i class="fa-solid fa-list"></i></li>
+				<li data-page="payments"><i class="fa-solid fa-money-bill-transfer"></i></li>
+			</ul>
+		</div>
+	</body>
+</html>
