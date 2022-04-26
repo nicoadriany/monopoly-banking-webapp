@@ -40,7 +40,7 @@ function connectToServer() {
 		if(json.type == "notification") {
 			addNotification(json.data.message);
 		} else if(json.type == "loginSuccess") {
-			$(".page-wrapper").css("display", "grid");
+			$(".page-wrapper").css("display", "flex");
 			$(".login-wrapper").fadeOut();
 		} else if(json.type == "ownData") {
 			updateName(json.data.name);
