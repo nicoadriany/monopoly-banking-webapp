@@ -39,7 +39,7 @@ $(document).ready(function() {
 	if (DEBUG) {
 		setTimeout(() => {
 			performLogin("Bank");
-			$("li[data-page='transferMoney']").click();
+			$("li[data-page='settings']").click();
 		}, 1000);
 	}
 });
@@ -71,6 +71,26 @@ $(document).ready(function() {
 		$("div.player-wrapper div.player div.icon").html("<i class='fa-solid fa-user'></i>");
 		$(this).find("div.icon").html("<i class='fa-solid fa-check-double blinking'></i>");
 	});
+
+  $("#add-player-submit").on("click", function() {
+    const addPlayerName = $("#add-player-name").val();
+    if (addPlayerName.trim()) {
+      performAddPlayer(addPlayerName);
+      $("#add-player-name").val("");
+    }
+  });
+
+  $("#force-disconnect-action").on("click", function() {
+    if (selectedPlayer && confirm(`Willst du die Verbindung von ${selectedPlayer} wirklich trennen?`)) {
+      performCloseConnection(selectedPlayer);
+    }
+  });
+
+  $("#delete-player-action").on("click", function() {
+    if (selectedPlayer && confirm(`Willst du den Spieler ${selectedPlayer} wirklich löschen?`)) {
+      performDeletePlayer(selectedPlayer);
+    }
+  });
 
 	
 

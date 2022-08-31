@@ -72,7 +72,11 @@ function connectToServer() {
 			});
 		} else if(json.type == "addPlayer") {
 			addPlayer(json.data.name);
-		}
+		} else if(json.type == "deletePlayer") {
+      const delName = json.data.name;
+
+      $("div.player[data-name='"+delName+"']").remove();
+    }
 	}
 }
 
@@ -94,6 +98,27 @@ const performGiveMoney = (receiver, amount, reason) => {
 		reason: reason
 	}
 	sendObject(connection, "giveMoney", data);
+}
+
+const performAddPlayer = (name) => {
+  let data = {
+    name: name
+  }
+  sendObject(connection, "createPlayer", data)
+}
+
+const performCloseConnection = (name) => {
+  let data = {
+    name: name
+  }
+  sendObject(connection, "closeConnection", data)
+}
+
+const performDeletePlayer = (name) => {
+  let data = {
+    name: name
+  }
+  sendObject(connection, "deletePlayer", data)
 }
 
 const sendObject = (con, type, data) => {
