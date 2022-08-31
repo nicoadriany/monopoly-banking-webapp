@@ -1,0 +1,27 @@
+{
+  "name": "monopoly-banking-webapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicoadriany/monopoly-banking-webapp.git"
+  },
+  "author": "Nico Adriany",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicoadriany/monopoly-banking-webapp/issues"
+  },
+  "homepage": "https://github.com/nicoadriany/monopoly-banking-webapp#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
