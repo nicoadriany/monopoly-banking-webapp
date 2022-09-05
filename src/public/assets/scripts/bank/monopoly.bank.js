@@ -1,78 +1,74 @@
 /* login handling */
 
-const DEBUG = true;
+const DEBUG = false;
 
 let selectedPlayer = "";
 
-const presets = [
-	50000,
-	100000,
-	250000,
-	500000,
-	1000000,
-	1500000,
-	2000000
-];
+const presets = [50000, 100000, 250000, 500000, 1000000, 1500000, 2000000];
 
-$(document).ready(function() {
-	$("#login-button").on("click", function() {
-		let loginName = $("#login-name").val();
-		performLogin(loginName);
-	});
+$(document).ready(function () {
+  $("#login-button").on("click", function () {
+    let loginName = $("#login-name").val();
+    performLogin(loginName);
+  });
 
-	//create presets
-	presets.forEach((v) => {
-		addPreset(v);
-	});
+  //create presets
+  presets.forEach((v) => {
+    addPreset(v);
+  });
 
-	$("div.presets").on("click", "div.preset", function() {
-		let amount = $(this).data("amount");
-		let reason = $(this).data("reason");
+  $("div.presets").on("click", "div.preset", function () {
+    let amount = $(this).data("amount");
+    let reason = $(this).data("reason");
 
-		if (selectedPlayer == "") {
-			return;
-		}
+    if (selectedPlayer == "") {
+      return;
+    }
 
-		performGiveMoney(selectedPlayer, amount, reason);
-	});
+    performGiveMoney(selectedPlayer, amount, reason);
+  });
 
-	if (DEBUG) {
-		setTimeout(() => {
-			performLogin("Bank");
-			$("li[data-page='settings']").click();
-		}, 1000);
-	}
+  if (DEBUG) {
+    setTimeout(() => {
+      performLogin("Bank");
+      $("li[data-page='settings']").click();
+    }, 1000);
+  }
 });
 
 /* navigation handling */
-$(document).ready(function() {
-	$("ul.navbar").on("click", "li", function() {
-		let dest = $(this).data("page");
-		if (dest === undefined) {
-			return;
-		}
+$(document).ready(function () {
+  $("ul.navbar").on("click", "li", function () {
+    let dest = $(this).data("page");
+    if (dest === undefined) {
+      return;
+    }
 
-		$("div.content-wrapper > div").hide();
-		$("div.header").text($("div.content-wrapper #" + dest).data("title"));
-		$("div.content-wrapper #" + dest).fadeIn();
-		$("ul.navbar li").removeClass("active");
-		$(this).addClass("active");
-	});
+    $("div.content-wrapper > div").hide();
+    $("div.header").text($("div.content-wrapper #" + dest).data("title"));
+    $("div.content-wrapper #" + dest).fadeIn();
+    $("ul.navbar li").removeClass("active");
+    $(this).addClass("active");
+  });
 
-	$("div.player-wrapper").on("click", "div.player", function() {
-		const playerName = $(this).data("name");
+  $("div.player-wrapper").on("click", "div.player", function () {
+    const playerName = $(this).data("name");
 
-		if (playerName == selectedPlayer) {
-			return;
-		}
+    if (playerName == selectedPlayer) {
+      return;
+    }
 
-		selectedPlayer = playerName;
-		
-		$("div.player-wrapper div.player div.icon").html("<i class='fa-solid fa-user'></i>");
-		$(this).find("div.icon").html("<i class='fa-solid fa-check-double blinking'></i>");
-	});
+    selectedPlayer = playerName;
 
-  $("#add-player-submit").on("click", function() {
+    $("div.player-wrapper div.player div.icon").html(
+      "<i class='fa-solid fa-user'></i>"
+    );
+    $(this)
+      .find("div.icon")
+      .html("<i class='fa-solid fa-check-double blinking'></i>");
+  });
+
+  $("#add-player-submit").on("click", function () {
     const addPlayerName = $("#add-player-name").val();
     if (addPlayerName.trim()) {
       performAddPlayer(addPlayerName);
@@ -80,68 +76,83 @@ $(document).ready(function() {
     }
   });
 
-  $("#force-disconnect-action").on("click", function() {
-    if (selectedPlayer && confirm(`Willst du die Verbindung von ${selectedPlayer} wirklich trennen?`)) {
+  $("#send-money-submit").on("click", function () {
+    if (selectedPlayer) {
+      const sendMoneyAmount = $("#send-money-input").val();
+      performGiveMoney(selectedPlayer, sendMoneyAmount, "Gutschrift");
+      $("#send-money-input").val("");
+    }
+  });
+
+  $("#force-disconnect-action").on("click", function () {
+    if (
+      selectedPlayer &&
+      confirm(
+        `Willst du die Verbindung von ${selectedPlayer} wirklich trennen?`
+      )
+    ) {
       performCloseConnection(selectedPlayer);
     }
   });
 
-  $("#delete-player-action").on("click", function() {
-    if (selectedPlayer && confirm(`Willst du den Spieler ${selectedPlayer} wirklich löschen?`)) {
+  $("#delete-player-action").on("click", function () {
+    if (
+      selectedPlayer &&
+      confirm(`Willst du den Spieler ${selectedPlayer} wirklich löschen?`)
+    ) {
       performDeletePlayer(selectedPlayer);
     }
   });
 
-	
-
-	$("div.menu-wrapper ul.navbar li:nth-child(1)").click();
+  $("div.menu-wrapper ul.navbar li:nth-child(1)").click();
 });
 
 /* set user name */
 const updateName = (name) => {
-	myUsername = name;
-}
+  myUsername = name;
+};
 
 /* add preset */
 
 const addPreset = (amount) => {
-	$("div.presets").append(
-		$('<div class="preset" data-amount="' + amount + '" data-reason="Gutschrift">')
-			.text(formatNumber(amount) + "€")
-	);
-}
+  $("div.presets").append(
+    $(
+      '<div class="preset" data-amount="' +
+        amount +
+        '" data-reason="Gutschrift">'
+    ).text(formatNumber(amount) + "€")
+  );
+};
 
 /* add player */
 const addPlayer = (name) => {
-	$("div.player-wrapper").append(
-		$('<div class="player noselect" data-name="' + name + '">')
-			.append($('<div class="icon">')
-				.html('<i class="fa-solid fa-user"></i>')
-			)
-			.append($('<div class="content">')
-				.append($('<p>')
-					.append($('<b>')
-						.text(name)
-					)
-					.append($('<br />'))
-					.append($('<span id="online-status-' + name + '">')
-						.text("Fetch status...")
-					)
-				)
-			)
-	);
-}
+  $("div.player-wrapper").append(
+    $('<div class="player noselect" data-name="' + name + '">')
+      .append($('<div class="icon">').html('<i class="fa-solid fa-user"></i>'))
+      .append(
+        $('<div class="content">').append(
+          $("<p>")
+            .append($("<b>").text(name))
+            .append($("<br />"))
+            .append(
+              $('<span id="online-status-' + name + '">').text(
+                "Fetch status..."
+              )
+            )
+        )
+      )
+  );
+};
 
 const clearPlayerlist = () => {
-	$("div.player-wrapper").empty();
-}
+  $("div.player-wrapper").empty();
+};
 
 const setPlayerOnlineStatus = (name, status) => {
+  let spanClass = status ? "status-online" : "status-offline";
+  let spanContent = status ? "Online" : "Offline";
 
-	let spanClass = status ? "status-online" : "status-offline";
-	let spanContent = status ? "Online" : "Offline";
-
-	$("span#online-status-" + name).text(spanContent);
-	$("span#online-status-" + name).removeClass();
-	$("span#online-status-" + name).addClass(spanClass);
-}
+  $("span#online-status-" + name).text(spanContent);
+  $("span#online-status-" + name).removeClass();
+  $("span#online-status-" + name).addClass(spanClass);
+};

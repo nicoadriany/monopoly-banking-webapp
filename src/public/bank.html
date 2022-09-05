@@ -64,6 +64,10 @@
               </div>
               <div>
                 <div class="headline">Manuelle Überweisung</div>
+                <div class="input-group">
+                  <input type="number" id="send-money-input" class="bank-input" placeholder="Betrag" />
+                  <button id="send-money-submit"><i class="fa-solid fa-angles-right"></i></button>
+                </div>
               </div>
             </div>
           </div>
@@ -72,14 +76,20 @@
               <div>
                 <div class="headline">Spielerspezifische Aktionen</div>
                 <div class="player-actions">
-                  <div class="player-action" id="force-disconnect-action">Verbindung trennen</div>
-                  <div class="player-action" id="delete-player-action">Spielerzugang löschen</div>
+                  <div class="player-action" id="force-disconnect-action">
+                    Verbindung trennen
+                  </div>
+                  <div class="player-action" id="delete-player-action">
+                    Spielerzugang löschen
+                  </div>
                 </div>
               </div>
               <div>
                 <div class="headline">Spieler hinzufügen</div>
-                <input type="text" id="add-player-name">
-                <button id="add-player-submit">Go</button>
+                <div class="input-group">
+                  <input type="text" id="add-player-name" class="bank-input" placeholder="Name des Spielers" />
+                  <button id="add-player-submit"><i class="fa-solid fa-angles-right"></i></button>
+                </div>
               </div>
             </div>
           </div>
