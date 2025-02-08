@@ -121,6 +121,22 @@ const performDeletePlayer = (name) => {
   sendObject(connection, "deletePlayer", data)
 }
 
+const performBroadcastRichest = () => {
+  sendObject(connection, "broadcastRichest")
+}
+
+const performBroadcastPoorest = () => {
+  sendObject(connection, "broadcastPoorest")
+}
+
+const performBroadcastFreeParkingAmount = () => {
+  sendObject(connection, "broadcastFreeParkingAmount")
+}
+
+const performTellRanking = () => {
+  sendObject(connection, "tellRanking")
+}
+
 const performGiveFreeParking = (name) => {
   let data = {
     name: name

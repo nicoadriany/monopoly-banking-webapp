@@ -106,6 +106,40 @@ $(document).ready(function () {
     }
   });
 
+  $("#broadcast-richest-action").on("click", function () {
+    if (
+      confirm(
+        `Willst du wirklich den (aktuell) reichsten Spieler ankündigen?`
+      )
+    ) {
+      performBroadcastRichest();
+    }
+  });
+
+  $("#broadcast-poorest-action").on("click", function () {
+    if (
+      confirm(
+        `Willst du wirklich den (aktuell) ärmsten Spieler ankündigen?`
+      )
+    ) {
+      performBroadcastPoorest();
+    }
+  });
+
+  $("#broadcast-free-parking-amount-action").on("click", function () {
+    performBroadcastFreeParkingAmount();
+  });
+
+  $("#tell-ranking-action").on("click", function () {
+    if (
+      confirm(
+        `Willst du wirklich jedem Spieler seine aktuelle Position mitteilen?`
+      )
+    ) {
+      performTellRanking();
+    }
+  });
+
   $("#delete-player-action").on("click", function () {
     if (
       selectedPlayer &&
