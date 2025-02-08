@@ -36,6 +36,15 @@ const addTransaction = (name, reason, amount, date, isPositive, sendNotification
 		moneyNotification = "Du hast " + formatNumber(amount) + "€ an " + name + " überwiesen";
 	}
 
+	const formattedDate = (new Date(date)).toLocaleString('de-DE', {
+		day: '2-digit',
+		month: '2-digit',
+		year: 'numeric',
+		hour: '2-digit',
+		minute: '2-digit',
+		hour12: false
+	});
+
 	$("div#transactions > div.transaction-list").prepend(
 		$('<div class="transaction" data-name="' + name + '">')
 			.append($('<div class="icon">')
@@ -55,7 +64,7 @@ const addTransaction = (name, reason, amount, date, isPositive, sendNotification
 					.text(moneyPrefix + formatNumber(amount) + '€')
 				)
 				.append($('<p class="time">')
-					.text(date)
+					.text(formattedDate + " Uhr")
 				)
 			)
 	);
