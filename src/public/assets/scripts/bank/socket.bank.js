@@ -121,6 +121,13 @@ const performDeletePlayer = (name) => {
   sendObject(connection, "deletePlayer", data)
 }
 
+const performGiveFreeParking = (name) => {
+  let data = {
+    name: name
+  }
+  sendObject(connection, "giveFreeParking", data)
+}
+
 const sendObject = (con, type, data) => {
 	let obj = {};
 	if (data != null) {

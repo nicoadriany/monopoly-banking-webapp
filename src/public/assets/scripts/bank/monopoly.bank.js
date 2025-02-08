@@ -18,7 +18,7 @@ $(document).ready(function () {
   });
 
   $("div.presets").on("click", "div.preset", function () {
-    let amount = $(this).data("amount");
+    let amount = parseInt($(this).data("amount"));
     let reason = $(this).data("reason");
 
     if (selectedPlayer == "") {
@@ -78,7 +78,7 @@ $(document).ready(function () {
 
   $("#send-money-submit").on("click", function () {
     if (selectedPlayer) {
-      const sendMoneyAmount = $("#send-money-input").val();
+      const sendMoneyAmount = parseInt($("#send-money-input").val());
       performGiveMoney(selectedPlayer, sendMoneyAmount, "Gutschrift");
       $("#send-money-input").val("");
     }
@@ -92,6 +92,17 @@ $(document).ready(function () {
       )
     ) {
       performCloseConnection(selectedPlayer);
+    }
+  });
+
+  $("#give-free-parking-action").on("click", function () {
+    if (
+      selectedPlayer &&
+      confirm(
+        `Willst du das Geld aus der Mitte wirklich an ${selectedPlayer} auszahlen?`
+      )
+    ) {
+      performGiveFreeParking(selectedPlayer);
     }
   });
 
