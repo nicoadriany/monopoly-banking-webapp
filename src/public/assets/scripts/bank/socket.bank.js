@@ -137,6 +137,18 @@ const performTellRanking = () => {
   sendObject(connection, "tellRanking")
 }
 
+const performSaveGame = () => {
+  sendObject(connection, "saveGame");
+}
+
+const performLoadGame = () => {
+  sendObject(connection, "loadGame");
+}
+
+const performResetGame = () => {
+  sendObject(connection, "resetGame");
+}
+
 const performGiveFreeParking = (name) => {
   let data = {
     name: name
