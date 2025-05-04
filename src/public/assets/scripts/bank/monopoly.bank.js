@@ -140,6 +140,36 @@ $(document).ready(function () {
     }
   });
 
+  $("#save-game-action").on("click", function () {
+    if (
+      confirm(
+        `Willst du wirklich den aktuellen Spielstand speichern?`
+      )
+    ) {
+      performSaveGame();
+    }
+  });
+
+  $("#load-game-action").on("click", function () {
+    if (
+      confirm(
+        `Willst du wirklich den letzten gespeicherten Spielstand laden?`
+      )
+    ) {
+      performLoadGame();
+    }
+  });
+
+  $("#reset-game-action").on("click", function () {
+    if (
+      confirm(
+        `Willst du den Spielstand wirklich zurücksetzen?`
+      )
+    ) {
+      performResetGame();
+    }
+  });
+
   $("#delete-player-action").on("click", function () {
     if (
       selectedPlayer &&
